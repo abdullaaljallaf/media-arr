@@ -3,10 +3,10 @@ services:
     image: lscr.io/linuxserver/prowlarr:latest
     container_name: prowlarr
     environment:
-      - PUID=568
-      - PGID=568
-      - UMASK=002
-      - TZ=Asia/Dubai
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - UMASK=${UMASK}
+      - TZ=${TZ}
     volumes:
       - /opt/arr/prowlarr:/config
     ports:
@@ -17,14 +17,14 @@ services:
     image: lscr.io/linuxserver/radarr:latest
     container_name: radarr
     environment:
-      - PUID=568
-      - PGID=568
-      - UMASK=002
-      - TZ=Asia/Dubai
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - UMASK=${UMASK}
+      - TZ=${TZ}
     volumes:
       - /opt/arr/radarr:/config
-      - /mnt/media/movies:/movies
-      - /mnt/media/downloads:/downloads
+      - ${MOVIES}:/movies
+      - ${DOWNLOADS}:/downloads
     ports:
       - "7878:7878"
     restart: unless-stopped
@@ -33,14 +33,14 @@ services:
     image: lscr.io/linuxserver/sonarr:latest
     container_name: sonarr
     environment:
-      - PUID=568
-      - PGID=568
-      - UMASK=002
-      - TZ=Asia/Dubai
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - UMASK=${UMASK}
+      - TZ=${TZ}
     volumes:
       - /opt/arr/sonarr:/config
-      - /mnt/media/tv:/tv
-      - /mnt/media/downloads:/downloads
+      - ${TV}:/tv
+      - ${DOWNLOADS}:/downloads
     ports:
       - "8989:8989"
     restart: unless-stopped
@@ -49,14 +49,14 @@ services:
     image: lscr.io/linuxserver/bazarr:latest
     container_name: bazarr
     environment:
-      - PUID=568
-      - PGID=568
-      - UMASK=002
-      - TZ=Asia/Dubai
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - UMASK=${UMASK}
+      - TZ=${TZ}
     volumes:
       - /opt/arr/bazarr:/config
-      - /mnt/media/movies:/movies
-      - /mnt/media/tv:/tv
+      - ${MOVIES}:/movies
+      - ${TV}:/tv
     ports:
       - "6767:6767"
     restart: unless-stopped
@@ -65,10 +65,10 @@ services:
     image: lscr.io/linuxserver/overseerr:latest
     container_name: overseerr
     environment:
-      - PUID=568
-      - PGID=568
-      - UMASK=002
-      - TZ=Asia/Dubai
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - UMASK=${UMASK}
+      - TZ=${TZ}
     volumes:
       - /opt/arr/overseerr:/config
     ports:
@@ -79,10 +79,10 @@ services:
     image: lscr.io/linuxserver/overseerr:latest
     container_name: overseerr-kids
     environment:
-      - PUID=568
-      - PGID=568
-      - UMASK=002
-      - TZ=Asia/Dubai
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - UMASK=${UMASK}
+      - TZ=${TZ}
     volumes:
       - /opt/arr/overseerr-kids:/config
     ports:
@@ -93,13 +93,13 @@ services:
     image: lscr.io/linuxserver/sabnzbd:latest
     container_name: sabnzbd
     environment:
-      - PUID=568
-      - PGID=568
-      - UMASK=002
-      - TZ=Asia/Dubai
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - UMASK=${UMASK}
+      - TZ=${TZ}
     volumes:
       - /opt/arr/sabnzbd:/config
-      - /mnt/media/downloads:/downloads
+      - ${DOWNLOADS}:/downloads
     ports:
       - "8080:8080"
     restart: unless-stopped
@@ -108,14 +108,14 @@ services:
     image: lscr.io/linuxserver/radarr:latest
     container_name: radarr-kids
     environment:
-      - PUID=568
-      - PGID=568
-      - UMASK=002
-      - TZ=Asia/Dubai
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - UMASK=${UMASK}
+      - TZ=${TZ}
     volumes:
       - /opt/arr/radarr-kids:/config
-      - /mnt/media/movies-kids:/movies
-      - /mnt/media/downloads:/downloads
+      - ${MOVIES_KIDS}:/movies
+      - ${DOWNLOADS}:/downloads
     ports:
       - "7879:7878"
     restart: unless-stopped
@@ -124,14 +124,14 @@ services:
     image: lscr.io/linuxserver/sonarr:latest
     container_name: sonarr-kids
     environment:
-      - PUID=568
-      - PGID=568
-      - UMASK=002
-      - TZ=Asia/Dubai
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - UMASK=${UMASK}
+      - TZ=${TZ}
     volumes:
       - /opt/arr/sonarr-kids:/config
-      - /mnt/media/tv-kids:/tv
-      - /mnt/media/downloads:/downloads
+      - ${TV_KIDS}:/tv
+      - ${DOWNLOADS}:/downloads
     ports:
       - "8990:8989"
     restart: unless-stopped
@@ -141,30 +141,30 @@ services:
     container_name: plex
     network_mode: host
     environment:
-      - PUID=568
-      - PGID=568
-      - UMASK=002
-      - TZ=Asia/Dubai
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - UMASK=${UMASK}
+      - TZ=${TZ}
     volumes:
       - /opt/arr/plex:/config
-      - /mnt/media/movies:/data/movies
-      - /mnt/media/tv:/data/tv
-      - /mnt/media/movies-kids:/data/kids-movies
-      - /mnt/media/tv-kids:/data/kids-tv
+      - ${MOVIES}:/data/movies
+      - ${TV}:/data/tv
+      - ${MOVIES_KIDS}:/data/kids-movies
+      - ${TV_KIDS}:/data/kids-tv
     restart: unless-stopped
 
   lidarr:
     image: lscr.io/linuxserver/lidarr:latest
     container_name: lidarr
     environment:
-      - PUID=568
-      - PGID=568
-      - UMASK=002
-      - TZ=Asia/Dubai
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - UMASK=${UMASK}
+      - TZ=${TZ}
     volumes:
       - /opt/arr/lidarr:/config
-      - /mnt/media/music:/music
-      - /mnt/media/downloads:/downloads
+      - ${MUSIC}:/music
+      - ${DOWNLOADS}:/downloads
     ports:
       - "8686:8686"
     restart: unless-stopped

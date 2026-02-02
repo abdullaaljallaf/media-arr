@@ -2,3 +2,6 @@
 *.env
 secrets/
 data/
+
+# compose backups
+docker-compose.yml.bak.*
